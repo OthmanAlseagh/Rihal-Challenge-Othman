@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Country;
+use App\Models\Level;
 use Illuminate\Database\Seeder;
 
-class CountrySeeder extends Seeder
+class LevelSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class CountrySeeder extends Seeder
      */
     public function run()
     {
-        Country::factory()->count(50)->create();
+        Level::factory()->count(10)->create();
     }
 }
