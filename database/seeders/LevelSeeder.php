@@ -14,6 +14,20 @@ class LevelSeeder extends Seeder
      */
     public function run()
     {
-        Level::factory()->count(10)->create();
+        $levels =[
+            'first',
+            'second',
+            'third',
+            'forth',
+            'fifth',
+            'sixth',
+            'seventh',
+            'eighth',
+            'ninth',
+            'tenth',
+            ];
+        foreach ($levels as $level){
+            Level::factory()->create(['name' => $level]);
+        }
     }
 }

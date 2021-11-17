@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\Country;
+use App\Models\Level;
+use App\Models\Student;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +19,25 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('home', function () {
+    return view('pages.home');
+});
+
+Route::get('student-date', function () {
+    $collection = Student::get()->pluck('date_of_birth')->map(function ($item) {
+        return Carbon::parse($item)->diff(Carbon::now())->y;
+    });
+    return view('pages.student_date',['average' => $collection->avg()]);
+});
+
+Route::get('count-country', function () {
+    $collection = Country::withCount('students')->get();
+    return view('pages.count_country',['collection' => $collection]);
+});
+
+Route::get('count-level', function () {
+    $collection = Level::withCount('students')->get();
+    return view('pages.count_level',['collection' => $collection]);
 });
