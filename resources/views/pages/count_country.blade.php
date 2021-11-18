@@ -5,7 +5,7 @@
     <br>
     <br>
     <div align="center">
-        <a class="btn btn-danger" href="{{ url('/home') }}">Back Home</a>
+        <a class="btn btn-danger" href="{{ url('/') }}">Back Home</a>
     </div>
     <footer>
         <div style="padding-left: 150px">
