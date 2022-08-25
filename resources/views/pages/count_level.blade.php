@@ -19,13 +19,13 @@
                         <br> <br>
                     </tr>
                     </thead>
-                    @foreach($collection as $level)
+                    @foreach($collection as $key => $value)
                         <tr>
                             <td style="padding-top: 10px ; width: 35%" class="text-center">
-                                {{$level->name}}
+                                {{$value['count']}}
                             </td>
                             <td style="padding-top: 10px ; width: 35%" class="text-center">
-                                {{$level->students_count}}
+                                {{$value['name']}}
                             </td>
                         </tr>
                     @endforeach
