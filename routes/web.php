@@ -4,7 +4,6 @@ use App\Models\Country;
 use App\Models\Level;
 use App\Models\Student;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,13 +43,3 @@ Route::get('count-level', function () {
     return view('pages.count_level',['collection' => getCollection($collection)]);
 });
 
-
-function getCollection($array): Collection
-{
-    return collect($array)->map(function ($key, $item) {
-        return [
-            'name' => $item,
-            'count' => $key
-        ];
-    })->values();
-}
