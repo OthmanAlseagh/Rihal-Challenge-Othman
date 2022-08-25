@@ -22,18 +22,24 @@ Route::get('/', function () {
 });
 
 Route::get('student-date', function () {
-    $collection = Student::get()->pluck('date_of_birth')->map(function ($item) {
+    $collection = Student::query()->pluck('date_of_birth')->all();
+
+    $collection = collect($collection)->map(function ($item) {
         return Carbon::parse($item)->diff(Carbon::now())->y;
     });
+
     return view('pages.student_date',['average' => $collection->avg()]);
 });
 
 Route::get('count-country', function () {
-    $collection = Country::withCount('students')->get();
-    return view('pages.count_country',['collection' => $collection]);
+   $collection = Country::withCount('students')->pluck('students_count', 'name')->all();
+
+    return view('pages.count_country',['collection' => getCollection($collection)]);
 });
 
 Route::get('count-level', function () {
-    $collection = Level::withCount('students')->get();
-    return view('pages.count_level',['collection' => $collection]);
+    $collection = Level::withCount('students')->pluck('students_count', 'name')->all();
+
+    return view('pages.count_level',['collection' => getCollection($collection)]);
 });
+
