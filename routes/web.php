@@ -28,18 +28,18 @@ Route::get('student-date', function () {
         return Carbon::parse($item)->diff(Carbon::now())->y;
     });
 
-    return view('pages.student_date',['average' => $collection->avg()]);
+    return view('pages.student_date', ['average' => $collection->avg()]);
 });
 
 Route::get('count-country', function () {
-   $collection = Country::withCount('students')->pluck('students_count', 'name')->all();
+    $data = Country::withCount('students')->pluck('students_count', 'name')->all();
 
-    return view('pages.count_country',['collection' => getCollection($collection)]);
+    return view('pages.showResult', ['chart' => getChart($data, 'Country', 'line')]);
 });
 
 Route::get('count-level', function () {
-    $collection = Level::withCount('students')->pluck('students_count', 'name')->all();
+    $data = Level::withCount('students')->pluck('students_count', 'name')->all();
 
-    return view('pages.count_level',['collection' => getCollection($collection)]);
+    return view('pages.showResult',['chart' => getChart($data, 'Level', 'column')]);
 });
 
